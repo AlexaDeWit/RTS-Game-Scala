@@ -58,17 +58,24 @@ class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
   glfwSetKeyCallback(id, keyCallback)
   glfwMakeContextCurrent(id)
   GL.createCapabilities()
+  setVSync(vsync)
 
-  /* Enable v-sync */
-  if (vsync) {
-    glfwSwapInterval(1);
-  }
+  
 
   /* 
    *
    * CLASS BODY
    *
   */
+
+  def setVSync(vsync: Boolean): Unit = {
+  /* Enable v-sync */
+    if (vsync) {
+      glfwSwapInterval(1)
+    } else {
+      glfwSwapInterval(0)
+    }
+  }
 
   def determineCapabilities(): GLCapabilities = {
     glfwDefaultWindowHints()

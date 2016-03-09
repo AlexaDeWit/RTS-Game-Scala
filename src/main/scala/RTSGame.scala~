@@ -1,0 +1,10 @@
+import org.lwjgl._
+import system.MemoryUtil._
+import glfw._
+import opengl._
+import glfw.GLFW._
+import opengl.GL11._
+
+object Main {
+  val GLFWErrorCallback errorCallback = GLFWErrorCallback.createPrint(System.err);
+}

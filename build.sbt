@@ -12,6 +12,8 @@ settings(
   fork in run := true,
   javaOptions in run += f"-Djava.library.path=${baseDirectory.value}%s/native",
   libraryDependencies ++= Seq(
+    "io.argonaut" %% "argonaut" % "6.1",
+    "org.scalaz" %% "scalaz-core" % "7.1.1"
   )
 
 )

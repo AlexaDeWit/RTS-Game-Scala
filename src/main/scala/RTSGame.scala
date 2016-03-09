@@ -1,3 +1,4 @@
+package alexadewit.rts_game
 import org.lwjgl._
 import system.MemoryUtil._
 import glfw._
@@ -31,9 +32,11 @@ object Main {
     glfwMakeContextCurrent(window);
     GL.createCapabilities();
 
+    val timer = new Timer()
     while (glfwWindowShouldClose(window) != GLFW_TRUE) {
-      update( deltaTime )  
-      draw()
+      val delta = timer.getLastDelta()
+      update(delta)  
+      draw(window)
       Thread.sleep(sleepTime)
     }
 
@@ -44,16 +47,10 @@ object Main {
     errorCallback.release();
   }
 
-  var lastTime = java.lang.System.currentTimeMillis();
-  def deltaTime(): Long = {
-    val now = java.lang.System.currentTimeMillis();
-    val dtime = now - lastTime
-    lastTime = now
-    dtime
-  }
   def update(dtime: Long): Unit = {
-      glfwPollEvents();
+      glfwPollEvents()
   }
-  def draw(): Unit = {
+  def draw(window: Long): Unit = {
+    glfwSwapBuffers(window)
   }
 }

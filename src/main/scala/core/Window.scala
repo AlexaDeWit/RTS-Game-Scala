@@ -27,7 +27,7 @@
  * At the time of authorship, Heiko's work was located here:
  * https://github.com/SilverTiger/lwjgl3-tutorial/blob/master/src/silvertiger/tutorial/lwjgl/graphic/Window.java
  */
-package alexadewit.rts_game
+package alexadewit.rts_game.core
 
 import org.lwjgl._
 import system.MemoryUtil._
@@ -37,8 +37,7 @@ import opengl._
 import opengl.GL11._
 
 class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
-
-  private val id: Long = glfwCreateWindow(width, height, title, NULL, NULL)
+  /* Constructor Section */
   val keyCallback:GLFWKeyCallback = new GLFWKeyCallback() {
     @Override
     override def invoke(window:Long, key:Int, scancode:Int, action:Int, mods:Int): Unit = {
@@ -46,19 +45,59 @@ class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
         glfwSetWindowShouldClose(window, GLFW_TRUE);
       }
     }
-  };
-  glfwSetKeyCallback(id, keyCallback);
-  glfwMakeContextCurrent(id);
-  GL.createCapabilities();
+  }
+  val capabilities = determineCapabilities()
+  if(capabilities.OpenGL32){
+    setOpenGl32Hints()
+  }else if(capabilities.OpenGL21){
+    setOpenGl21Hints()
+  }else{
+    throw new RuntimeException("OpenGL 3.2 not supported, you may need to update your video card.")
+  }
+  private val id: Long = glfwCreateWindow(width, height, title, NULL, NULL)
+  glfwSetKeyCallback(id, keyCallback)
+  glfwMakeContextCurrent(id)
+  GL.createCapabilities()
 
   /* Enable v-sync */
- if (vsync) {
-   glfwSwapInterval(1);
- }
+  if (vsync) {
+    glfwSwapInterval(1);
+  }
 
- def isClosing(): Boolean = glfwWindowShouldClose(id) == GLFW_TRUE
- def setTitle(title:String): Unit = glfwSetWindowTitle(id, title)
- def destroy(): Unit = {
-   glfwDestroyWindow(id)
- }
+  /* 
+   *
+   * CLASS BODY
+   *
+  */
+
+  def determineCapabilities(): GLCapabilities = {
+    glfwDefaultWindowHints()
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
+    val temp = glfwCreateWindow(1, 1, "", NULL, NULL)
+    glfwMakeContextCurrent(temp)
+    GL.createCapabilities()
+    val caps = GL.getCapabilities()
+    glfwDestroyWindow(temp)
+    caps
+  }
+
+  def setOpenGl32Hints(): Unit = {
+    glfwDefaultWindowHints()
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3)
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2)
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE)
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE)
+  }
+
+  def setOpenGl21Hints(): Unit = {
+    glfwDefaultWindowHints()
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+  }
+
+  def isClosing(): Boolean = glfwWindowShouldClose(id) == GLFW_TRUE
+  def setTitle(title:String): Unit = glfwSetWindowTitle(id, title)
+  def destroy(): Unit = {
+    glfwDestroyWindow(id)
+  }
 }

@@ -1,4 +1,5 @@
 package alexadewit.rts_game
+import alexadewit.rts_game.core._
 import org.lwjgl._
 import system.MemoryUtil._
 import glfw._
@@ -17,6 +18,7 @@ object Main {
     }
     val window = new Window(640,480,"Hi!", true)
     val timer = new Timer()
+
     while(!window.isClosing()) {
       val delta = timer.getLastDelta()
       update(delta)  

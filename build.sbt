@@ -10,7 +10,7 @@ settings( commonSettings: _* ).
 settings(
   name := "RTSGame",
   fork in run := true,
-  javaOptions in run += f"-Djava.library.path=/home/$userName%s/Dropbox/Scala/RTSGame/native",
+  javaOptions in run += f"-Djava.library.path=${baseDirectory.value}%s/native",
   libraryDependencies ++= Seq(
   )
 

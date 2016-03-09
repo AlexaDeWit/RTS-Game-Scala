@@ -1,3 +1,4 @@
 Start with 5 workers.
 Workers gather 5 resources.
 Takes 2.5 seconds to gather resources.
+If one sees a part of a structure the whole structure is revealed (This is to balance the fact that some structures might not be symmetrical and only have the flag on the left side of the building)

@@ -1,0 +1,18 @@
+Produced:
+
+Wheres the fight?
+
+Click on unit:
+
+Awaiting your command
+At your service
+
+Move command:
+
+Moving.
+Moving out.
+
+Attack command:
+
+To battle!
+Charge!

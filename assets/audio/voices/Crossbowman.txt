@@ -1,0 +1,18 @@
+Produced:
+
+Crossbow ready.
+
+Click on unit:
+
+Yes?
+Yes my liege?
+
+Move command:
+
+Already moving.
+Repositioning.
+
+Attack command:
+
+Bolts shall rain
+Steady!

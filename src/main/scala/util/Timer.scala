@@ -63,14 +63,14 @@ class Timer(initialTime: Long) {
     }
   }
 
-  def incrementUpsCount: Unit = {
+  def incrementUpsCount(): Unit = {
     upsCount = upsCount + 1
   }
-  def incrementFpsCount: Unit = {
+  def incrementFpsCount(): Unit = {
     fpsCount = fpsCount + 1
   }
 
-  def getFps = if(fps > 0 ) fps else fpsCount
-  def getUps = if(ups > 0 ) ups else upsCount
+  def getFps() = if(fps > 0 ) fps else fpsCount
+  def getUps() = if(ups > 0 ) ups else upsCount
 
 }

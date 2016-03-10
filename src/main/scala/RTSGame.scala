@@ -21,9 +21,12 @@ object Main {
 
     while(!window.isClosing()) {
       val delta = timer.getLastDelta()
+
       update(delta)  
+      timer.incrementUpsCount()
+
       draw(glfwGetCurrentContext())
-      Thread.sleep(sleepTime)
+      timer.incrementFpsCount()
     }
     window.destroy()
 

@@ -33,3 +33,7 @@ Instant toggle (Can be used when the enemy shoots and then turn it off).
 ---Sacrifical cermony
 
 Makes the unit start with 50 mana.
+
+---Sprint
+
+Makes the unit run 0.25 faster for 3 seconds but cannot use shield wall for 10 seconds, 30 seconds cooldown.

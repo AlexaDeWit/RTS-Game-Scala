@@ -36,7 +36,7 @@ import glfw.GLFW._
 import opengl._
 import opengl.GL11._
 
-class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
+class Window(width: Int, height: Int, title: String,private var vsync: Boolean) {
   /*
    *
    * Constructor Section
@@ -77,7 +77,10 @@ class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
     } else {
       glfwSwapInterval(0)
     }
+    this.vsync = vsync
   }
+
+  def isVSyncEnabled(): Boolean = vsync
 
   def determineCapabilities(): GLCapabilities = {
     glfwDefaultWindowHints()

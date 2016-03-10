@@ -37,7 +37,11 @@ import opengl._
 import opengl.GL11._
 
 class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
-  /* Constructor Section */
+  /*
+   *
+   * Constructor Section
+   *
+   */
   val keyCallback:GLFWKeyCallback = new GLFWKeyCallback() {
     @Override
     override def invoke(window:Long, key:Int, scancode:Int, action:Int, mods:Int): Unit = {
@@ -60,13 +64,11 @@ class Window(width: Int, height: Int, title: String,val vsync: Boolean) {
   GL.createCapabilities()
   setVSync(vsync)
 
-  
-
   /* 
    *
    * CLASS BODY
    *
-  */
+   */
 
   def setVSync(vsync: Boolean): Unit = {
   /* Enable v-sync */

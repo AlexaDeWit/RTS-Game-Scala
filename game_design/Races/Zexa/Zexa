@@ -1,0 +1,8 @@
+Shroud spreads from buildings.
+Shroud is needed to place a building.
+
+The building process of a structure is in Four phases:
+1: You select a building and then decides where it goes.
+2: The hive starts producing a worm-like creature (Takes... Lets say 5 seconds)
+3: The worm-like creature starts moving to the building location (The worm-like creature can be killed in this state and it can only move on shroud).
+4: The worm-like creature then starts morphing into the building.

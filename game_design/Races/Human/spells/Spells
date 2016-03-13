@@ -27,13 +27,19 @@ CD: 30
 
 ---Shield wall:
 
+Requiers: "Shield wall" upgrade
+
 Slows the unit by 0.25 but gives it 2+ armor.
 Instant toggle (Can be used when the enemy shoots and then turn it off).
 
 ---Sacrifical cermony
 
+Requiers: "Sacrifical cermony" upgrade
+
 Makes the unit start with 50 mana.
 
 ---Sprint
+
+Requiers: "Sprint" upgrade
 
 Makes the unit run 0.25 faster for 3 seconds but cannot use shield wall for 10 seconds, 30 seconds cooldown.

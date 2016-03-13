@@ -1,5 +1,11 @@
 
 ---Pounce
 
+Requiers: "Pounce" upgrade
+
 Jumps 50 pixels
 Auto cast: Jump towards an enemy when in 50 pixels.
+
+---Awaken/Sleep
+
+Turns "Sleeping one" to an "Awaken one" For 30 sec and then has a 30 sec cooldown once its turned off. (Can be turned off whenever you want to).

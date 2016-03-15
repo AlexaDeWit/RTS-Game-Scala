@@ -4,3 +4,4 @@ Workers gather 5 resources.
 Takes 2.5 seconds to gather resources.
 If one sees a part of a structure the whole structure is revealed (This is to balance the fact that some structures might not be symmetrical and only have the flag on the left side of the building)
 Cancelling buildings gives back the resources, however it does not return all of them, It starts at 50% and gets less and less the further you have built the building.
+Workers can only carry one resource at a time, Either gold or wood... If the worker is carrying gold and you rightclick a tree he will start gathering wood instead.

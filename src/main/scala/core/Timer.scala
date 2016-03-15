@@ -28,7 +28,7 @@
  * https://github.com/SilverTiger/lwjgl3-tutorial/blob/master/src/silvertiger/tutorial/lwjgl/core/Timer.java
  */
 
-package alexadewit.rts_game
+package alexadewit.rts_game.core
 import org.lwjgl.glfw.GLFW._
 
 class Timer(initialTime: Long) {
@@ -63,6 +63,7 @@ class Timer(initialTime: Long) {
     }
   }
 
+  def getLastTime() = lastTime
   def incrementUpsCount(): Unit = {
     upsCount = upsCount + 1
   }

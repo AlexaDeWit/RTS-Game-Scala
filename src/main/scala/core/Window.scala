@@ -112,4 +112,7 @@ class Window(width: Int, height: Int, title: String,private var vsync: Boolean) 
   def destroy(): Unit = {
     glfwDestroyWindow(id)
   }
+  def update(): Unit = {
+    glfwSwapBuffers(id)
+  }
 }

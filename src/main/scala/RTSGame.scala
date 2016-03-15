@@ -1,5 +1,7 @@
 package alexadewit.rts_game
+
 import alexadewit.rts_game.core._
+import scala.annotation.tailrec
 import org.lwjgl._
 import system.MemoryUtil._
 import glfw._
@@ -7,9 +9,7 @@ import opengl._
 import glfw.GLFW._
 import opengl.GL11._
 
-object Main {
-
-  val targetFps = 60
+object Game {
 
   def main( args: Array[String] ): Unit = {
     val errorCallback = GLFWErrorCallback.createPrint(System.err)
@@ -22,40 +22,72 @@ object Main {
     val timer = new Timer()
     gameLoop(window, timer)
 
-        window.destroy()
+    window.destroy()
 
     glfwTerminate();
     errorCallback.release();
   }
 
-  def gameLoop(window: Window, timer: Timer): Unit = {
-    var accumulator = 0L
-    var passes = 0
-    while(!window.isClosing()) {
-      val delta = timer.getLastDelta()
-      accumulator = accumulator + delta
-      passes = passes + 1
+  def gameLoop(window: Window, timer: Timer):Unit = {
+    val targetFps = 60
+    val targetUps = 60
+    val targetUpdateDelta = 1.0f / targetUps //time an update is menat to take
 
-      update(delta)  
-      timer.incrementUpsCount()
+    @tailrec
+    def run(delta: Float, accumulator: Float): Unit = {
+      input()
 
-      draw(glfwGetCurrentContext())
+      @tailrec
+      def runUpdates(accumulator: Float) {
+        if( accumulator >= targetUpdateDelta ){
+          update()
+          timer.incrementUpsCount()
+          runUpdates( accumulator - targetUpdateDelta )
+        }
+      }
+      runUpdates( accumulator )
+
+      val alpha = accumulator / targetUpdateDelta
+      render(alpha)
       timer.incrementFpsCount()
+
+      window.update()
 
       if(!window.isVSyncEnabled()) {
         sync(targetFps)
       }
+      //Spin the recusive "loop"
+      if( isRunning() && !window.isClosing() ){
+        val nextDelta = timer.getLastDelta()
+        run(nextDelta, accumulator + nextDelta )
+      }
     }
-
+    val delta = timer.getLastDelta()
+    run(delta, delta)
   }
 
-  def update(dtime: Long): Unit = {
-      glfwPollEvents()
+  def isRunning(): Boolean = {
+    true
   }
-  def draw(context: Long): Unit = {
-    glfwSwapBuffers(context)
+  def update(): Unit = {
+  }
+  def input(): Unit = {
+    glfwPollEvents()
+  }
+  def render(alpha: Float): Unit = {
   }
 
   def sync(targetFps: Int): Unit = {
+    //sanity
+    if( targetFps > 0 ){
+      val sleepTime = 1000 / targetFps
+      try{
+        Thread.sleep(sleepTime)
+      }
+      catch{
+        //do nothing for now
+        case e: InterruptedException => Unit
+      }
+    }
   }
 }

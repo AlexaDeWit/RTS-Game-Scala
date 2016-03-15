@@ -31,35 +31,32 @@
 package alexadewit.rts_game.core
 import org.lwjgl.glfw.GLFW._
 
-class Timer(initialTime: Long) {
-  def this() {
-    this(java.lang.System.currentTimeMillis())
-  }
-
+class Timer() {
+  private val initialTime = java.lang.System.currentTimeMillis() / 1000.0f
   private var lastTime = initialTime
-  private var timeAccummulator = 0L
+  private var timeAccummulator = 0.0
   private var fps = 0
   private var ups = 0
   private var fpsCount = 0
   private var upsCount = 0
 
   def getLastDelta() = {
-    val curr = java.lang.System.currentTimeMillis()
+    val curr = java.lang.System.currentTimeMillis() / 1000.0f
     val delta = curr - lastTime
     lastTime = curr
     timeAccummulator = timeAccummulator + delta
     update()
-    delta
+    delta 
   }
   def elapsedTime() = glfwGetTime()
   
   private def update(): Unit = {
-    if( timeAccummulator > 1000 ){
+    if( timeAccummulator > 1 ){
       ups = upsCount
       upsCount = 0
       fps = fpsCount
       fpsCount = 0
-      timeAccummulator = timeAccummulator - 1000
+      timeAccummulator = timeAccummulator - 1
     }
   }
 
